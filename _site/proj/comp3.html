@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>Kaggle TGS Salt Identification Challenge - Computer Vision Lab</title>
+        <meta name="author" content="Manuel Carita" />
+        <meta name="description" content="Kaggle TGS Salt Identification Challenge" />
+        <meta name="keywords" content="Kaggle TGS Salt Identification Challenge, Computer Vision Lab, " />
+
+        <meta content="" property="fb:app_id">
+        <meta content="Computer Vision Lab" property="og:site_name">
+        
+          <meta content="Kaggle TGS Salt Identification Challenge" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+" property="og:description">
+        
+        
+          <meta content="http://localhost:4000/proj/comp3.html" property="og:url">
+        
+        
+        
+          <meta content="http://localhost:4000/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta name="twitter:creator" content="@">
+        
+          <meta name="twitter:title" content="Kaggle TGS Salt Identification Challenge">
+        
+        
+          <meta name="twitter:url" content="http://localhost:4000/proj/comp3.html">
+        
+        
+          <meta name="twitter:description" content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'http://localhost:4000';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row-picture">
+              <img id="about" class="logo-img" src="/static/img/logo.png" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h3 class="list-group-item-heading" style="padding-top: 15%;font-size: 32px">Manuel Carita</h3>
+              <h5 class="list-group-item-heading">Mechatronics Engineer</h5>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://www.linkedin.com/in/manuelcarita"><i class="fa fa-linkedin"></i></a>
+    
+        <a class="icon" target="_blank" href="https://github.com/manul30"><i class="fa fa-github"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro " style="padding-top: 5%;padding-left: 40%;font-size: 24px;">Kaggle TGS Salt Identification Challenge</h2>
+            
+            </div>
+            <p class="info">
+              
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary competition_page">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  comp3.html"><a href="/" target="_self"><i class="fa fa-home"></i> Home</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  comp3.html"><a href="/projects" target="_self"><i class="fa fa-desktop"></i> Projects</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  comp3.html"><a href="/about" target="_self"><i class="fa fa-user"></i> About me</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  comp3.html"><a href="/resume" target="_self"><i class="fa fa-graduation-cap"></i> Profile</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <article class="post">
+  <h3>Kaggle TGS Salt Identification Challenge</h3>
+    
+        
+            
+            
+    <img src='/static/projects/comp3/title.jpg' alt="Project title image">
+  <p> </p>
+  <div class="post-content">
+    <p>The goal of the <a href="https://www.kaggle.com/c/tgs-salt-identification-challenge">challenge</a> on Kaggle platform is pixel-wise semantic segmentation of salt bodies depicted on a seismic reflection images.</p>
+
+<p><a href="/deeplearning/competitions/2018/10/24/Semantic-Segmentation-of-Seismic-Reflection-Images.html">Here</a> you can find a description of the 14th place solution by Argus team (<a href="https://www.kaggle.com/romul0212">Ruslan Baikulov</a>, <a href="https://www.kaggle.com/nikolasent">Nikolay Falaleev</a>).</p>
+
+<p>The final result of participation: the <strong>14th</strong> place out of 3234 teams (<strong>top-0.5%</strong>, Kaggle <strong>gold</strong> megal).</p>
+
+<h3 id="contents">Contents:</h3>
+
+<ol>
+  <li><a href="/deeplearning/competitions/2018/10/23/About-Kaggle-TGS-Salt-Identification-Challenge.html">About Kaggle TGS Salt Identification Challenge</a></li>
+  <li><a href="/deeplearning/competitions/2018/10/24/Semantic-Segmentation-of-Seismic-Reflection-Images.html">Semantic Segmentation of Seismic Reflection Images</a></li>
+</ol>
+
+<h2 id="sample-results">Sample results</h2>
+
+<p><img src="/assets/post14/postprocess.png" alt="Sample predictions" class="center-image" /></p>
+
+<p><em>Example of the whole mosaic post-processing. Green/blue - salt/empty regions from the train dataset; red - predicted mask; yellow - inpainted by the post-processing (used in the final submission).</em></p>
+
+<p>The project code is available on <a href="https://github.com/lRomul/argus-tgs-salt">Github</a>.</p>
+
+<p><em>The title image is from <a href="https://www.domeenergy.com/understanding-salt-domes/">here</a>.</em></p>
+
+
+    <p> </p>
+    
+
+<h3>Competition posts</h3>
+    
+    <div class="well">
+<div class="list-group">
+    
+    <div class="list-group-item">
+    <div class="row-action-primary">
+        
+        <i><img src=/assets/post14/corner_postprocess.png alt="Title img"></i>
+        
+    </div>
+    <div class="row-content">
+      <div class="least-content">24 Oct 2018</div>
+      <h4 class="list-group-item-heading"><a href="/deeplearning/competitions/2018/10/24/Semantic-Segmentation-of-Seismic-Reflection-Images.html">Semantic Segmentation of Seismic Reflection Images</a></h4>
+      
+      <p class="list-group-item-text">A gold medal solution of the TGS Salt Identification Challenge.</p>
+      
+      <div class="least-content-readtime">
+
+  12 mins read
+
+</div>
+    </div>
+    </div>
+    <div class="list-group-separator"></div>
+    
+    <div class="list-group-item">
+    <div class="row-action-primary">
+        
+        <i><img src=/assets/logos/tgs.png alt="Title img"></i>
+        
+    </div>
+    <div class="row-content">
+      <div class="least-content">23 Oct 2018</div>
+      <h4 class="list-group-item-heading"><a href="/deeplearning/competitions/2018/10/23/About-Kaggle-TGS-Salt-Identification-Challenge.html">About Kaggle TGS Salt Identification Challenge</a></h4>
+      
+      <p class="list-group-item-text">Kaggle Challenge to segment salt deposits beneath the Earth's surface on seismic images.</p>
+      
+      <div class="least-content-readtime">
+
+  1 min read
+
+</div>
+    </div>
+    </div>
+    <div class="list-group-separator"></div>
+    
+    </div>
+</div>
+
+
+</article>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>.
+</footer>
+<div align="center">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-0000000000000000"
+    data-ad-slot="0000000000"
+    data-ad-format="auto"></ins>
+</div>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104440412-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

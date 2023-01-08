@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Kaggle: TGS Salt Identification Challenge",
+        "image": "comp3/title.jpg",
+        "url": "/proj/comp3.html",
+        "date": "Oct 2018",
+        "tags": ["Deep Learning", "Computer Vision", "Kaggle"],
+        "main": "true",
+        "id": "comp3"
+    },
+    {
+        "name": "Lyft Perception Challenge",
+        "image": "comp2/title.gif",
+        "url": "/proj/comp2.html",
+        "date": "May 2018",
+        "tags": ["Deep Learning", "Computer Vision", "Self-Driving"],
+        "main": "true",
+        "id": "comp2"
+    },
+    {
+        "name": "Kaggle: IEEE's Signal Processing Society - Camera Model Identification",
+        "image": "comp1/title_img.jpg",
+        "url": "/proj/comp1.html",
+        "date": "Jan 2018",
+        "tags": ["Deep Learning", "Kaggle"],
+        "main": "true",
+        "id": "comp1"
+    },
+]

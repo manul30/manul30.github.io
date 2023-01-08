@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>Camera model identification with deep learning - Computer Vision Lab</title>
+        <meta name="author" content="Manuel Carita" />
+        <meta name="description" content="Camera model identification with deep learning" />
+        <meta name="keywords" content="Camera model identification with deep learning, Computer Vision Lab, DeepLearning, Competitions" />
+
+        <meta content="" property="fb:app_id">
+        <meta content="Computer Vision Lab" property="og:site_name">
+        
+          <meta content="Camera model identification with deep learning" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+" property="og:description">
+        
+        
+          <meta content="http://localhost:4000/deeplearning/competitions/2018/02/20/Camera-model-identification-with-deep-learning.html" property="og:url">
+        
+        
+          <meta content="2018-02-20T04:00:00-05:00" property="article:published_time">
+          <meta content="http://localhost:4000/about/" property="article:author">
+        
+        
+          <meta content="http://localhost:4000/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+          
+          <meta content="DeepLearning" property="article:section">
+          
+        
+        
+          
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta name="twitter:creator" content="@">
+        
+          <meta name="twitter:title" content="Camera model identification with deep learning">
+        
+        
+          <meta name="twitter:url" content="http://localhost:4000/deeplearning/competitions/2018/02/20/Camera-model-identification-with-deep-learning.html">
+        
+        
+          <meta name="twitter:description" content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'http://localhost:4000';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row-picture">
+              <img id="about" class="logo-img" src="/static/img/logo.png" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h3 class="list-group-item-heading" style="padding-top: 15%;font-size: 32px">Manuel Carita</h3>
+              <h5 class="list-group-item-heading">Mechatronics Engineer</h5>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://www.linkedin.com/in/manuelcarita"><i class="fa fa-linkedin"></i></a>
+    
+        <a class="icon" target="_blank" href="https://github.com/manul30"><i class="fa fa-github"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro " style="padding-top: 5%;padding-left: 40%;font-size: 24px;">Camera model identification with deep learning</h2>
+            
+            </div>
+            <p class="info">
+              
+                <span class="time">20 Feb 2018</span>
+              
+              
+                <span class="categories">
+                  &raquo; 
+                  
+                    <a href="/category/DeepLearning">DeepLearning</a>
+                    , 
+                  
+                    <a href="/category/Competitions">Competitions</a>
+                    
+                  
+                </span>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary post">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item Camera-model-identification-with-deep-learning.html"><a href="/" target="_self"><i class="fa fa-home"></i> Home</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Camera-model-identification-with-deep-learning.html"><a href="/projects" target="_self"><i class="fa fa-desktop"></i> Projects</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Camera-model-identification-with-deep-learning.html"><a href="/about" target="_self"><i class="fa fa-user"></i> About me</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Camera-model-identification-with-deep-learning.html"><a href="/resume" target="_self"><i class="fa fa-graduation-cap"></i> Profile</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <div class="post-content well">
+<article class="content">
+    <div class="post-head">
+    <h1><b>Camera model identification with deep learning </b></h1>
+    </div>
+    <p>February 20, 2018</p>
+    <p>
+
+  5 mins read
+
+</p>
+    <div class="post"><h2 id="about-the-task">About the task</h2>
+
+<p>The goal of the competition on <a href="https://www.kaggle.com/c/sp-society-camera-model-identification">Kaggle</a> platform was to build an algorithm that identifies which camera model captured a given image by using traces intrinsically left in the raw image.
+The discussed solution is based on convolutional neural networks as classifiers.</p>
+
+<p>The list of camera models for the challenge:</p>
+
+<ul>
+  <li>Sony NEX-7</li>
+  <li>Motorola Moto X</li>
+  <li>Motorola Nexus 6</li>
+  <li>Motorola DROID MAXX</li>
+  <li>LG Nexus 5x</li>
+  <li>Apple iPhone 6</li>
+  <li>Apple iPhone 4s</li>
+  <li>HTC One M7</li>
+  <li>Samsung Galaxy S4</li>
+  <li>Samsung Galaxy Note 3</li>
+</ul>
+
+<p>One may notice that there is a Sony NEX-7 camera, which is a mirrorless interchangeable lens camera, so, different lenses could cause some extra difficulties as lens type is not provided as a metadata parameter for the test dataset. 
+Fortunately, it was not a big problem as the camera’s images have superior visual quality and it barely was the only class which it was possible to distinguish at a glance.</p>
+
+<p>This challenge was evaluated on the weighted categorization accuracy of predictions. Weights were 0.7 for unaltered images and 0.3 for altered images.</p>
+
+<h2 id="dataset">Dataset</h2>
+
+<p>Originally, the dataset contained 275 random images for each camera for training and 2640 images in the test dataset.</p>
+
+<p>The train data consisted of full images, while the test dataset was presented only by single 512x512 pixel patches cropped from the center of images taken with the device.
+What is more, half of the images in the test imageset was manipulated and labeled accordingly <em>_unalt</em> and <em>_manip</em>. The test images possible transformations are listed below:</p>
+
+<ul>
+  <li>JPEG compression (quality = 70, 90)</li>
+  <li>Resizing by bicubic interpolation (scale factors: 0.5, 0.8, 1.5, 2.0)</li>
+  <li>Gamma correction (0.8, 1.2)</li>
+</ul>
+
+<p>Interestingly, manipulation levels were limited by the listed discrete values.</p>
+
+<h2 id="dataset-enriching">Dataset enriching</h2>
+
+<p>One of the keys to the competition was to download as many photos taken by appropriate cameras as possible.
+For the purpose, the <a href="https://www.flickr.com/services/api/">Flickr API</a> was used. Unfortunately, it does not provide any tools for simple images sorting by camera model from EXIF without necessity to download images. That is why images were found by tags and description and filtered locally.
+It was very important to filter out all irrelevant images (e.q. edited) as it may lead to incorrect features extraction in a CNN.</p>
+
+<p>Filtering criteria:</p>
+<ul>
+  <li>Correct image size according to the camera specification. An image could be in horizontal or vertical orientation</li>
+  <li>Jpeg quality &gt; 93 for filtering out compressed and edited images</li>
+  <li>Correct camera model in EXIF information</li>
+  <li>No comments on editing in photo editing software, such as Photoshop, Lightroom, GIMP, etc.</li>
+</ul>
+
+<p>These parameters can be checked in a batch manner with a very useful <a href="https://www.imagemagick.org/script/identify.php">identify</a> cli utility. For example, <code class="highlighter-rouge">identify -format '%[EXIF:Model]' /path/to/file</code>
+returns the camera model from EXIF; <code class="highlighter-rouge">identify -format '%Q' /path/to/file</code> - jpeg quality. So, a bash script was created for image filtering.</p>
+
+<p>Finally, a dataset of 25000 images was utilized for training and 500 - for validation.</p>
+
+<h2 id="lets-train-cnns">Let’s train CNNs</h2>
+
+<p>The Kaggle competitor Andres Torrubia shared an excellent starter <a href="https://github.com/antorsae/sp-society-camera-model-identification">code</a> written with Keras and TensorFlow backend, which was really helpful for participants. Many thanks to Andres!
+It allows training different CNN architectures, such as ResNet, DenseNet, Inception V3, VGG, MobileNet, etc., set patch size and dropout rate.
+What is interesting about the implementation: there is an additional parameter ‘is_manipulated’ which actually is a flag indicating whether a given image is a raw one or manipulated.
+The flag was added to the final stage of CNN’s architectures in the fully connected layers of the image classifier and it looks like it helps.</p>
+
+<p>For me, the competition was an interesting personal experience with Nvidia Tesla V100 GPU as provided by AWS EC2 p3.2xlarge instances and it definitely was a pleasant impression.<br />
+Finally, ResNet50, DenseNet201, InceptionResNetV2 and MobileNet was used for the final ensemble. All models were trained on 512x512 px patches. Adam optimizer with initial learning rate = 1e-4 and reduce learning rate on plateau policy with patience 5 and factor 0.5 was involved.
+Predictions were blended by mean square and post-processed. Do not forget to renormalize the raw predicted by CNNs probabilities to sum up 1!</p>
+
+<h2 id="postprocessing---the-key-to-the-competition">Postprocessing - the key to the competition</h2>
+
+<p>Test time augmentation was applied for predictions on the test dataset. A symmetry of a dihedral group D<sub>4</sub> (4 pi/2 rotation and all flips) was used.
+The resulted predictions were averaged by mean square. Arithmetic mean was examined as well, but performed worse for the competition on the public leaderboard.</p>
+
+<p>It was observed that the predicted class distribution is near to equal. Hence, one may assume that there is equal number of images from each class. The altered images were considered as separate classes.
+So, there are 20 classes for images assignment and 132 images are expected for each class (given 2640 images in the test set). Given the assumption, predictions where balanced for the final submission. See the <a href="/deeplearning/competitions/2018/02/21/An-approach-to-predicted-class-balancing.html">post</a> for details.</p>
+
+<h2 id="results">Results</h2>
+
+<p>As it was mentioned, my final submission is in top-3% on the <a href="https://www.kaggle.com/c/sp-society-camera-model-identification/leaderboard">leaderboard</a> which is the best personal result on Kaggle so far and, what is more important, a lot of useful lessons were learned during the challenge. Such as training models on AWS, competitions data science tricks as class balancing, etc.</p>
+
+<h2 id="further-thoughts">Further thoughts</h2>
+
+<ul>
+  <li>It may be quite interesting to visualize a CNN, trained for the task, in order to find out what features are attractive and important for the model.</li>
+  <li>One should distinguish the real-world task and a Kaggle challenge. Here, several tricks, such as predicted class balancing may work. And, well, it probably is the major drawback of such competitions.</li>
+</ul>
+
+</div>
+    <hr />
+    <div class="share-page">
+    Share this on &rarr;
+ <a href="https://twitter.com/share" class="twitter-share-button" data-via="">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Google + -->
+<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Facebook -->
+<div class="fb-share-button" data-href="http://localhost:4000/deeplearning/competitions/2018/02/20/Camera-model-identification-with-deep-learning.html" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</article>
+<hr />
+
+<div class="PageNavigation">
+  
+    <a class="prev pull-left" href="http://localhost:4000/deeplearning/2017/10/20/How-I-run-TensorFlow-with-CUDA-9-and-cuDNN-7-in-openSUSE-on-AMD-Ryzen.html">&laquo; How I run TensorFlow with CUDA 9 and cuDNN 7 in openSUSE on Ryzen</a>
+  
+  
+    <a class="next pull-right" href="http://localhost:4000/deeplearning/competitions/2018/02/21/An-approach-to-predicted-class-balancing.html">An approach to predicted class balancing &raquo;</a>
+  
+</div>
+
+
+
+    
+    
+        
+            
+        
+            
+        
+    
+        
+            
+                
+                <div class="panel-body">
+                <h4>Related Posts</h4>
+                <ul>
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/hardware,/deeplearning/2018/11/06/Benchmarking-RTX-2080-Ti-vs-Pascal-GPUs-with-DL-tasks.html">Benchmarking RTX 2080 Ti vs Pascal GPUs vs Tesla V100 with DL tasks</a>
+                    
+                        <small>(Categories: <a href="/category/Hardware,">Hardware,</a>, <a href="/category/DeepLearning">DeepLearning</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/10/24/Semantic-Segmentation-of-Seismic-Reflection-Images.html">Semantic Segmentation of Seismic Reflection Images</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/10/23/About-Kaggle-TGS-Salt-Identification-Challenge.html">About Kaggle TGS Salt Identification Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/06/05/Discussion-of-the-Lyft-Perception-Challenge.html">Discussion of the Lyft Perception Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/06/05/Multiclass-semantic-segmentation-with-LinkNet34.html">Multiclass semantic segmentation with LinkNet34</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/05/31/About-Lyft-Perception-Challenge.html">About Lyft Perception Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+
+    </ul>
+    </div>
+
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>.
+</footer>
+<div align="center">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-0000000000000000"
+    data-ad-slot="0000000000"
+    data-ad-format="auto"></ins>
+</div>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104440412-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>Neural network for multiclass image segmentation - Computer Vision Lab</title>
+        <meta name="author" content="Manuel Carita" />
+        <meta name="description" content="Neural network for multiclass image segmentation" />
+        <meta name="keywords" content="Neural network for multiclass image segmentation, Computer Vision Lab, DeepLearning" />
+
+        <meta content="" property="fb:app_id">
+        <meta content="Computer Vision Lab" property="og:site_name">
+        
+          <meta content="Neural network for multiclass image segmentation" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+" property="og:description">
+        
+        
+          <meta content="http://localhost:4000/deeplearning/2017/09/21/Neural-network-for-multiclass-image-segmentation.html" property="og:url">
+        
+        
+          <meta content="2017-09-21T04:00:00-05:00" property="article:published_time">
+          <meta content="http://localhost:4000/about/" property="article:author">
+        
+        
+          <meta content="http://localhost:4000/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+          
+          <meta content="DeepLearning" property="article:section">
+          
+        
+        
+          
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta name="twitter:creator" content="@">
+        
+          <meta name="twitter:title" content="Neural network for multiclass image segmentation">
+        
+        
+          <meta name="twitter:url" content="http://localhost:4000/deeplearning/2017/09/21/Neural-network-for-multiclass-image-segmentation.html">
+        
+        
+          <meta name="twitter:description" content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'http://localhost:4000';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row-picture">
+              <img id="about" class="logo-img" src="/static/img/logo.png" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h3 class="list-group-item-heading" style="padding-top: 15%;font-size: 32px">Manuel Carita</h3>
+              <h5 class="list-group-item-heading">Mechatronics Engineer</h5>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://www.linkedin.com/in/manuelcarita"><i class="fa fa-linkedin"></i></a>
+    
+        <a class="icon" target="_blank" href="https://github.com/manul30"><i class="fa fa-github"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro " style="padding-top: 5%;padding-left: 40%;font-size: 24px;">Neural network for multiclass image segmentation</h2>
+            
+            </div>
+            <p class="info">
+              
+                <span class="time">21 Sep 2017</span>
+              
+              
+                <span class="categories">
+                  &raquo; 
+                  
+                    <a href="/category/DeepLearning">DeepLearning</a>
+                    
+                  
+                </span>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary post">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item Neural-network-for-multiclass-image-segmentation.html"><a href="/" target="_self"><i class="fa fa-home"></i> Home</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Neural-network-for-multiclass-image-segmentation.html"><a href="/projects" target="_self"><i class="fa fa-desktop"></i> Projects</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Neural-network-for-multiclass-image-segmentation.html"><a href="/about" target="_self"><i class="fa fa-user"></i> About me</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Neural-network-for-multiclass-image-segmentation.html"><a href="/resume" target="_self"><i class="fa fa-graduation-cap"></i> Profile</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <div class="post-content well">
+<article class="content">
+    <div class="post-head">
+    <h1><b>Neural network for multiclass image segmentation </b></h1>
+    </div>
+    <p>September 21, 2017</p>
+    <p>
+
+  3 mins read
+
+</p>
+    <div class="post"><h2 id="introduction">Introduction</h2>
+
+<p>The main goal of the project is to train an fully convolutional neural network (encoder-decoder architecture with skip connections) for semantic segmentation of a video from a front-facing camera on a car in order to mark pixels belong to road and cars with Tensorflow (using the <a href="https://www.cityscapes-dataset.com/">Cityscapes</a> dataset).</p>
+
+<h2 id="dataset">Dataset</h2>
+
+<p>The Cityscapes dataset is a very famous set of images for benchmarking semantic segmentation algorithms. There are 30 classes, such as road, car, building, traffic sign, person, etc.
+An example image with all masks applied is depicted below:</p>
+
+<p><img src="/assets/post6/cityscapes.jpg" alt="Cityscapes sample image" /></p>
+
+<p>The glorious triple-pointed star on the hood is visible in every image and actually is a kind of watermark of the dataset.</p>
+
+<p>Because it is just a learning task, only two classes (roads and cars) were chosen from the Cityscapes dataset for the segmentation. All 5000 images with fine annotations were used for training. On the preprocessing step, all images were scaled down by the factor of 2 in order to speed things up during online batch preparation.</p>
+
+<h2 id="architecture">Architecture</h2>
+<p>A Fully Convolutional Network (FCN-8 Architecture developed at Berkeley, see <a href="https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf">paper</a> ) was applied for the project. It uses the convolutional head of VGG16 pretrained on ImageNet dataset as an encoder.
+A decoder is used to upsample features, extracted by the VGG16 model, to the original image size. The decoder is based on transposed convolution layers. Skip connections are used to recover the spatial resolution ou upscaled image, while the encoder output represents highly generalized features with low spatial resolution.</p>
+
+<p><img src="/assets/post6/fcn.png" alt="Architecture diagram" /></p>
+
+<p>Due to fully convolutional nature of the artificial neural network, it could be applied to any image size and the image size used during training could be different from the one, used on testing or deployment stage.</p>
+
+<h2 id="training">Training</h2>
+
+<p>The training dataset was rather limited (just 5000 images). That is why, input images were treated by random contrast and brightness augmentation (as a linear function of the input image). It helps to produce reasonable predictions in difficult light conditions. The augmentation was applied online during training, so, each image for the CNN was unique to some extent. Training image size was 512x256 px.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span> 
+
+<span class="k">def</span> <span class="nf">bc_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="n">img</span><span class="p">[</span><span class="n">img</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+    <span class="n">img</span><span class="p">[</span><span class="n">img</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>   
+
+<span class="n">contr</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">)</span> <span class="c1"># Contrast augmentation
+</span><span class="n">bright</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c1"># Brightness augmentation
+</span><span class="n">image</span> <span class="o">=</span> <span class="n">bc_img</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">contr</span><span class="p">,</span> <span class="n">bright</span><span class="p">)</span></code></pre></figure>
+
+<p>Additionally, random Gaussian noise could be applied.</p>
+
+<p>Hyperparameters were chosen by the try-and-error process. RMSProp optimizer performed better for the imageset as compared to a well-established Adam optimizer. Weights were initialized by a random normal initializer. Some benefits of L2 weights regularization were observed, therefore, it was applied in order to reduce grainy edges of masks.</p>
+
+<p>One can see, that classes are unbalanced, so, there are significantly more pixels correspondent to roads, than to cars. Therefore, a weighted loss was applied with weights 2:1 (cars:roads) and some increase in the prediction quality was observed.</p>
+
+<p>The CNN was trained for <code class="highlighter-rouge">30</code> epochs with learning rate <code class="highlighter-rouge">1e-4</code>.</p>
+
+<h2 id="results">Results</h2>
+
+<p><img src="/assets/post6/cityscapes_1.png" alt="cityscapes_1.png" /></p>
+
+<p><em>It correctly do not label a cyclist as a car, but mark small partly occluded cars.</em></p>
+
+<p><img src="/assets/post6/cityscapes_2.png" alt="cityscapes_1.png" /></p>
+
+<p><em>It does not have problems with recognizing a cobbled street as a road.</em></p>
+
+<p><img src="/assets/post6/cityscapes_3.png" alt="cityscapes_1.png" /></p>
+
+<p><em>And the ANN is able to mark cars in different projections.</em></p>
+
+</div>
+    <hr />
+    <div class="share-page">
+    Share this on &rarr;
+ <a href="https://twitter.com/share" class="twitter-share-button" data-via="">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Google + -->
+<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Facebook -->
+<div class="fb-share-button" data-href="http://localhost:4000/deeplearning/2017/09/21/Neural-network-for-multiclass-image-segmentation.html" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</article>
+<hr />
+
+<div class="PageNavigation">
+  
+    <a class="prev pull-left" href="http://localhost:4000/classifier/2017/08/01/Image-classification-using-SVM.html">&laquo; Image classification using SVM</a>
+  
+  
+    <a class="next pull-right" href="http://localhost:4000/deeplearning/2017/10/20/How-I-run-TensorFlow-with-CUDA-9-and-cuDNN-7-in-openSUSE-on-AMD-Ryzen.html">How I run TensorFlow with CUDA 9 and cuDNN 7 in openSUSE on Ryzen &raquo;</a>
+  
+</div>
+
+
+
+    
+    
+        
+            
+        
+    
+        
+            
+                
+                <div class="panel-body">
+                <h4>Related Posts</h4>
+                <ul>
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/hardware,/deeplearning/2018/11/06/Benchmarking-RTX-2080-Ti-vs-Pascal-GPUs-with-DL-tasks.html">Benchmarking RTX 2080 Ti vs Pascal GPUs vs Tesla V100 with DL tasks</a>
+                    
+                        <small>(Categories: <a href="/category/Hardware,">Hardware,</a>, <a href="/category/DeepLearning">DeepLearning</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/10/24/Semantic-Segmentation-of-Seismic-Reflection-Images.html">Semantic Segmentation of Seismic Reflection Images</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/10/23/About-Kaggle-TGS-Salt-Identification-Challenge.html">About Kaggle TGS Salt Identification Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/06/05/Discussion-of-the-Lyft-Perception-Challenge.html">Discussion of the Lyft Perception Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/06/05/Multiclass-semantic-segmentation-with-LinkNet34.html">Multiclass semantic segmentation with LinkNet34</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="http://localhost:4000/deeplearning/competitions/2018/05/31/About-Lyft-Perception-Challenge.html">About Lyft Perception Challenge</a>
+                    
+                        <small>(Categories: <a href="/category/DeepLearning">DeepLearning</a>, <a href="/category/Competitions">Competitions</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+        
+            
+        
+    
+
+
+    </ul>
+    </div>
+
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>.
+</footer>
+<div align="center">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-0000000000000000"
+    data-ad-slot="0000000000"
+    data-ad-format="auto"></ins>
+</div>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104440412-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

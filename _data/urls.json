@@ -1,0 +1,23 @@
+[
+  {
+    "text": "Home",
+    "url": "/",
+    "icon": "fa-home",
+    "layout": "post"
+  },
+  {
+    "text": "Projects",
+    "url": "/projects",
+    "icon": "fa-desktop"
+  },
+  {
+    "text": "About me",
+    "url": "/about",
+    "icon": "fa-user"
+  },
+  {
+    "text": "Profile",
+    "url": "/resume",
+    "icon": "fa-graduation-cap"
+  }
+]
