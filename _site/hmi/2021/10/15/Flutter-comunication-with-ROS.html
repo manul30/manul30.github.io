@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>Flutter communication with ROS video streaming - Computer Vision Lab</title>
+        <meta name="author" content="Manuel Carita" />
+        <meta name="description" content="Flutter communication with ROS video streaming" />
+        <meta name="keywords" content="Flutter communication with ROS video streaming, Computer Vision Lab, HMI" />
+
+        <meta content="" property="fb:app_id">
+        <meta content="Computer Vision Lab" property="og:site_name">
+        
+          <meta content="Flutter communication with ROS video streaming" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+" property="og:description">
+        
+        
+          <meta content="http://localhost:4000/hmi/2021/10/15/Flutter-comunication-with-ROS.html" property="og:url">
+        
+        
+          <meta content="2021-10-15T04:00:00-05:00" property="article:published_time">
+          <meta content="http://localhost:4000/about/" property="article:author">
+        
+        
+          <meta content="http://localhost:4000/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+          
+          <meta content="HMI" property="article:section">
+          
+        
+        
+          
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@">
+        <meta name="twitter:creator" content="@">
+        
+          <meta name="twitter:title" content="Flutter communication with ROS video streaming">
+        
+        
+          <meta name="twitter:url" content="http://localhost:4000/hmi/2021/10/15/Flutter-comunication-with-ROS.html">
+        
+        
+          <meta name="twitter:description" content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'http://localhost:4000';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row-picture">
+              <img id="about" class="logo-img" src="/static/img/logo.png" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h3 class="list-group-item-heading" style="padding-top: 15%;font-size: 32px">Manuel Carita</h3>
+              <h5 class="list-group-item-heading">Mechatronics Engineer</h5>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://www.linkedin.com/in/manuelcarita"><i class="fa fa-linkedin"></i></a>
+    
+        <a class="icon" target="_blank" href="https://github.com/manul30"><i class="fa fa-github"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-7 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro " style="padding-top: 5%;padding-left: 40%;font-size: 24px;">Flutter communication with ROS video streaming</h2>
+            
+            </div>
+            <p class="info">
+              
+                <span class="time">15 Oct 2021</span>
+              
+              
+                <span class="categories">
+                  &raquo; 
+                  
+                    <a href="/category/HMI">HMI</a>
+                    
+                  
+                </span>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary post">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item Flutter-comunication-with-ROS.html"><a href="/" target="_self"><i class="fa fa-home"></i> Home</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Flutter-comunication-with-ROS.html"><a href="/projects" target="_self"><i class="fa fa-desktop"></i> Projects</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Flutter-comunication-with-ROS.html"><a href="/about" target="_self"><i class="fa fa-user"></i> About me</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  Flutter-comunication-with-ROS.html"><a href="/resume" target="_self"><i class="fa fa-graduation-cap"></i> Profile</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <div class="post-content well">
+<article class="content">
+    <div class="post-head">
+    <h1><b>Flutter communication with ROS video streaming </b></h1>
+    </div>
+    <p>October 15, 2021</p>
+    <p>
+
+  8 mins read
+
+</p>
+    <div class="post"><h2 id="introduction">Introduction</h2>
+
+<p>The main goal of the project is to stablish a communication between a Flutter desktop application and the ROS node. Also, to send and receive messages and visualize them in the app. The result of the implementation will be shown in Gazebo and the app itself.</p>
+
+<h2 id="roslib">Roslib</h2>
+<p>We are using <code class="highlighter-rouge">Roslib ^0.0.3</code>, a flutter library for communicating to a ROS node over websockets with rosbridge, influenced by roslibjs, according to its <a href="https://pub.dev/packages/roslib/versions/0.0.3">author</a>.</p>
+
+<p><em><strong>Websockets in ROS</strong></em></p>
+
+<p>In order to work with websockets, it is neccesary to be able to execute it in a ROS node. That’s why we are using <code class="highlighter-rouge">rosbridge_suite</code> package. To install it, you can execute the following command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-&lt;rosdistro&gt;-rosbridge-server</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Where <code class="highlighter-rouge">&lt;rosditro&gt;</code> is the workspace ROS version. In our case, it is <code class="highlighter-rouge">melodic</code>.</p>
+
+<h2 id="ros">ROS</h2>
+
+<p>Before moving to the code, it is important to review some ROS concepts such as <code class="highlighter-rouge">node</code> and <code class="highlighter-rouge">topics</code>.</p>
+
+<p>According to the <strong><a href="http://wiki.ros.org/">ROS wiki</a></strong>, a node is a process that performs computation. Nodes are combined together into a graph and communicate with one another using streaming topics, RPC services, and the Parameter Server. It is an executable that ROS uses to communicate with other nodes.</p>
+
+<p>In the other side, topics are named buses over which nodes exchange messages. Topics have anonymous publish/subscribe semantics, which decouples the production of information from its consumption. In that way, nodes can publish messages to a topic as well as subscribe to receive messages.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/ROS-master-node-topic.png" align="center" width="1500" /></p>
+
+<p>We are using these concepts to start building our widgets in Flutter.</p>
+
+<h2 id="widget">Widget</h2>
+
+<h3 id="ros-connection"><strong>ROS connection</strong></h3>
+<p>For the creation of the app we are going to create a Widget called <code class="highlighter-rouge">JoyStickPage</code> that returns a <code class="highlighter-rouge">Scaffold</code> widget. Inside of it we define our variables to initiate our <code class="highlighter-rouge">Ros</code> and <code class="highlighter-rouge">Topic</code> instances.</p>
+
+<p>We’ll work with the <code class="highlighter-rouge">camera</code>, <code class="highlighter-rouge">cmd_vel</code>, and <code class="highlighter-rouge">imu</code> topics of the turtlebot robot.</p>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre></td><td class="code"><pre><span class="kd">class</span> <span class="nc">JoyStickPage</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="o">{</span>
+  <span class="nd">@override</span>
+  <span class="n">_JoyStickPageState</span> <span class="n">createState</span><span class="o">()</span> <span class="o">=&gt;</span> <span class="n">_JoyStickPageState</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">_JoyStickPageState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">JoyStickPage</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="n">late</span> <span class="n">Ros</span> <span class="n">ros</span><span class="o">;</span>
+  <span class="n">late</span> <span class="n">Topic</span> <span class="n">cmd_vel</span><span class="o">;</span>
+  <span class="n">late</span> <span class="n">Topic</span> <span class="n">imu</span><span class="o">;</span>
+  <span class="n">late</span> <span class="n">Topic</span> <span class="n">camera</span><span class="o">;</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">initState</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">ros</span> <span class="o">=</span> <span class="n">Ros</span><span class="o">(</span><span class="nl">url:</span> <span class="s">'ws://0.0.0.0:9090'</span><span class="o">);</span>
+
+    <span class="n">cmd_vel</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
+        <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
+        <span class="nl">name:</span> <span class="s">'/cmd_vel'</span><span class="o">,</span>
+        <span class="nl">type:</span> <span class="s">"geometry_msgs/Twist"</span><span class="o">,</span>
+        <span class="nl">reconnectOnClose:</span> <span class="kc">true</span><span class="o">,</span>
+        <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
+        <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">);</span>
+
+
+    <span class="n">imu</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
+      <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
+      <span class="nl">name:</span> <span class="s">'imu'</span><span class="o">,</span>
+      <span class="nl">type:</span> <span class="s">'sensor_msgs/Imu'</span><span class="o">,</span>
+      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">,</span>
+      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
+    <span class="o">);</span>
+
+    <span class="n">camera</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
+      <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
+      <span class="nl">name:</span> <span class="s">'camera/image/compressed'</span><span class="o">,</span>
+      <span class="nl">type:</span> <span class="s">'sensor_msgs/CompressedImage'</span><span class="o">,</span>
+      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">,</span>
+      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
+    <span class="o">);</span>
+
+    <span class="k">super</span><span class="o">.</span><span class="na">initState</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="n">initConnection</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="n">ros</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
+    <span class="n">setState</span><span class="o">(()</span> <span class="o">{});</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="n">destroyConnection</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
+    <span class="n">await</span> <span class="n">ros</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="n">setState</span><span class="o">(()</span> <span class="o">{});</span>
+  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We also declare two void functions that help us publishing the messsages from de joystick to the <code class="highlighter-rouge">cmd_vel</code> topic of the turtlebot.</p>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>  
+  <span class="kt">void</span> <span class="nf">publishCmd</span><span class="p">(</span><span class="kt">double</span> <span class="n">_linear_speed</span><span class="o">,</span> <span class="kt">double</span> <span class="n">_angular_speed</span><span class="o">)</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="kd">var</span> <span class="n">linear</span> <span class="o">=</span> <span class="o">{</span><span class="s">'x'</span><span class="o">:</span> <span class="n">_linear_speed</span><span class="o">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">};</span>
+    <span class="kd">var</span> <span class="n">angular</span> <span class="o">=</span> <span class="o">{</span><span class="s">'x'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="n">_angular_speed</span><span class="o">};</span>
+    <span class="kd">var</span> <span class="n">twist</span> <span class="o">=</span> <span class="o">{</span><span class="s">'linear'</span><span class="o">:</span> <span class="n">linear</span><span class="o">,</span> <span class="s">'angular'</span><span class="o">:</span> <span class="n">angular</span><span class="o">};</span>
+    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">publish</span><span class="o">(</span><span class="n">twist</span><span class="o">);</span>
+    <span class="n">print</span><span class="o">(</span><span class="s">'cmd published'</span><span class="o">);</span>
+    <span class="n">publishCounter</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kt">void</span> <span class="n">_move</span><span class="o">(</span><span class="kt">double</span> <span class="n">_degrees</span><span class="o">,</span> <span class="kt">double</span> <span class="n">_distance</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">print</span><span class="o">(</span>
+        <span class="s">'Degree:'</span> <span class="o">+</span> <span class="n">_degrees</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">' Distance:'</span> <span class="o">+</span> <span class="n">_distance</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="kt">double</span> <span class="n">radians</span> <span class="o">=</span> <span class="n">_degrees</span> <span class="o">*</span> <span class="o">((</span><span class="mi">22</span> <span class="o">/</span> <span class="mi">7</span><span class="o">)</span> <span class="o">/</span> <span class="mi">180</span><span class="o">);</span>
+    <span class="kt">double</span> <span class="n">linear_speed</span> <span class="o">=</span> <span class="n">cos</span><span class="o">(</span><span class="n">radians</span><span class="o">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">angular_speed</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="o">(</span><span class="n">radians</span><span class="o">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="o">;</span>
+
+    <span class="n">publishCmd</span><span class="o">(</span><span class="n">linear_speed</span><span class="o">,</span> <span class="n">angular_speed</span><span class="o">);</span>
+  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="joystick"><strong>Joystick</strong></h3>
+
+<p>For the plotting of the Joystick, we are using the flutter library <code class="highlighter-rouge">control_pad</code> which can be found <strong><a href="https://pub.dev/packages/control_pad/versions/1.1.1+1">here</a></strong>.</p>
+
+<p><img src="https://i.imgur.com/ZwfNg9W.jpg" align="center" width="300" /></p>
+
+<h3 id="image"><strong>Image</strong></h3>
+<p>We also need to build a Widget able to show the image received from the camera topic of our robot. in order to do that, we create a function to get the image from the string message that returns from the topic. The encoding given to the images is using base64, so we decode in the same way:</p>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="n">Widget</span> <span class="nf">getImagenBase64</span><span class="p">(</span><span class="kt">String</span> <span class="n">imagen</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">var</span> <span class="n">_imageBase64</span> <span class="o">=</span> <span class="n">imagen</span><span class="o">;</span>
+    <span class="kd">const</span> <span class="n">Base64Codec</span> <span class="n">base64</span> <span class="o">=</span> <span class="n">Base64Codec</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">_imageBase64</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Container</span><span class="o">(</span><span class="nl">child:</span> <span class="n">Text</span><span class="o">(</span><span class="s">'Image'</span><span class="o">),);</span>
+    <span class="kd">var</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">_imageBase64</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="na">memory</span><span class="o">(</span>
+          <span class="n">bytes</span><span class="o">,</span>
+          <span class="nl">gaplessPlayback:</span> <span class="kc">true</span><span class="o">,</span>
+          <span class="nl">width:</span> <span class="mi">400</span><span class="o">,</span>
+          <span class="nl">fit:</span> <span class="n">BoxFit</span><span class="o">.</span><span class="na">fitWidth</span><span class="o">,</span>
+       
+    <span class="o">);</span>
+  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="streaming"><strong>Streaming</strong></h3>
+
+<p>Our app will be constantly reading the new messages of the websocket node thanks to the <code class="highlighter-rouge">StreamBuilder</code> Widget declare as below. The connection will be triggered with a button of class <code class="highlighter-rouge">ActionChip</code>. Finally, we call the <code class="highlighter-rouge">getImageBase64()</code> to render the image in our app with an embedded HTML tag.</p>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+</pre></td><td class="code"><pre><span class="o">...</span>
+      <span class="nl">body:</span> <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="kt">Object</span><span class="o">&gt;(</span>
+      <span class="nl">stream:</span> <span class="n">ros</span><span class="o">.</span><span class="na">statusStream</span><span class="o">,</span>
+      <span class="nl">builder:</span> <span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">snapshot</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Center</span><span class="o">(</span>
+          <span class="nl">child:</span> <span class="n">Column</span><span class="o">(</span>
+            <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="o">,</span>
+            <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="o">,</span>
+            <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;[</span>
+              <span class="n">ActionChip</span><span class="o">(</span>
+                <span class="nl">label:</span> <span class="n">Text</span><span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span>
+                    <span class="o">?</span> <span class="s">'DISCONNECT'</span>
+                    <span class="o">:</span> <span class="s">'CONNECT'</span><span class="o">),</span>
+                <span class="nl">backgroundColor:</span> <span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span>
+                    <span class="o">?</span> <span class="n">Colors</span><span class="o">.</span><span class="na">green</span><span class="o">[</span><span class="mi">300</span><span class="o">]</span>
+                    <span class="o">:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">grey</span><span class="o">[</span><span class="mi">300</span><span class="o">],</span>
+                <span class="nl">onPressed:</span> <span class="o">()</span> <span class="o">{</span>
+                  <span class="n">print</span><span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
+                  <span class="k">if</span> <span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">!=</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">initConnection</span><span class="o">();</span>
+                  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">destroyConnection</span><span class="o">();</span>
+                  <span class="o">}</span>
+                <span class="o">},</span>
+              <span class="o">),</span>
+              <span class="n">Padding</span><span class="o">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mi">10</span><span class="o">)),</span>
+              <span class="n">Container</span><span class="o">(</span>
+              <span class="nl">child:</span> <span class="n">JoystickView</span><span class="o">(</span>
+                <span class="nl">onDirectionChanged:</span> <span class="o">(</span> <span class="kt">double</span> <span class="n">degrees</span><span class="o">,</span> <span class="kt">double</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">_move</span><span class="o">(</span><span class="n">degrees</span><span class="o">,</span> <span class="n">distance</span><span class="o">);</span>
+                <span class="o">},</span>
+              <span class="o">),),</span>
+              <span class="n">Padding</span><span class="o">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mi">20</span><span class="o">)),</span>
+                  <span class="n">StreamBuilder</span><span class="o">(</span>
+                    <span class="nl">stream:</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscription</span><span class="o">,</span>
+                    <span class="nl">builder:</span> <span class="o">(</span><span class="n">context2</span><span class="o">,</span><span class="n">AsyncSnapshot</span><span class="o">&lt;</span><span class="kd">dynamic</span><span class="o">&gt;</span> <span class="n">snapshot2</span><span class="o">){</span>
+                      <span class="k">if</span> <span class="o">(</span><span class="n">snapshot2</span><span class="o">.</span><span class="na">hasData</span><span class="o">){</span>
+                        <span class="k">return</span> <span class="n">Html</span><span class="o">(</span>
+                          
+                          <span class="nl">data:</span> <span class="s">"""&lt;img src="</span><span class="nl">data:</span><span class="n">https</span><span class="c1">//image/jpeg;base64,${snapshot2.data['msg']['data']}" &gt;"""</span>
+
+                        <span class="o">);</span>
+                      <span class="o">}</span>
+                      <span class="k">else</span><span class="o">{</span>
+                        <span class="k">return</span> <span class="n">CircularProgressIndicator</span><span class="o">();</span>
+                      <span class="o">}</span>
+                    <span class="o">}</span>
+                  <span class="o">),</span>
+                <span class="o">]</span>
+              <span class="o">),</span>
+            
+          <span class="o">);</span>
+
+      <span class="o">},</span>
+
+<span class="o">...</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="final-result">Final result</h2>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AmCjIxHKl5g" frameborder="0" allowfullscreen="" align="center"></iframe>
+
+<p>For details of the implementation see the <a href="https://github.com/manul30/Flutter-video-streaming-ROS">project repo</a>.</p>
+
+</div>
+    <hr />
+    <div class="share-page">
+    Share this on &rarr;
+ <a href="https://twitter.com/share" class="twitter-share-button" data-via="">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Google + -->
+<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Facebook -->
+<div class="fb-share-button" data-href="http://localhost:4000/hmi/2021/10/15/Flutter-comunication-with-ROS.html" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</article>
+<hr />
+
+<div class="PageNavigation">
+  
+    <a class="prev pull-left" href="http://localhost:4000/opencv/2017/05/07/Bird's-Eye-View-Transformation.html">&laquo; Bird's Eye View Transformation</a>
+  
+  
+</div>
+
+
+
+    
+    
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+    
+
+
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>.
+</footer>
+<div align="center">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-0000000000000000"
+    data-ad-slot="0000000000"
+    data-ad-format="auto"></ins>
+</div>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104440412-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

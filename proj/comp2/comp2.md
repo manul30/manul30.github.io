@@ -28,7 +28,5 @@ The project code is available on [Github][Github].
 
 [Lyft]: https://www.udacity.com/lyft-challenge
 [Carla]: http://carla.org/
-[About]: {% post_url 2018-05-31-About-Lyft-Perception-Challenge %}
-[Linknet]: {% post_url 2018-06-01-Multiclass-semantic-segmentation-with-LinkNet34 %}
-[Discussion]: {% post_url 2018-06-05-Discussion-of-the-Lyft-Perception-Challenge %}
+
 [Github]: https://github.com/NikolasEnt/Lyft-Perception-Challenge

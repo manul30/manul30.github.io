@@ -30,7 +30,6 @@ _The title image is from [here][title_link]._
 [Ruslan_li]: https://www.kaggle.com/romul0212
 [Nikolay_li]: https://www.kaggle.com/nikolasent
 
-[About]: {% post_url 2018-10-23-About-Kaggle-TGS-Salt-Identification-Challenge %}
-[Solution]: {% post_url 2018-10-24-Semantic-Segmentation-of-Seismic-Reflection-Images %}
+
 [Github]: https://github.com/lRomul/argus-tgs-salt
 [title_link]: https://www.domeenergy.com/understanding-salt-domes/

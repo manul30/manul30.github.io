@@ -1,38 +1,22 @@
 [
+
     {
-        "name": "Cityscapes Semantic Segmentation",
-        "image": "proj4/title_img.gif",
-        "url": "/proj/proj4",
-        "date": "Sep 2017",
-        "tags": ["Deep Learning","Computer Vision"],
-        "main": "true",
-        "id": "proj4"
-    },
-    {
-        "name": "Vehicle and Lane Lines Detection",
-        "image": "proj2/title_img.gif",
+        "name": "AUV Bobelto Human-Machine Interface",
+        "image": "proj2/title_hmi.gif",
         "url": "/proj/proj2",
-        "date": "Mar 2017",
-        "tags": ["Self-Driving","Computer Vision"],
+        "date": "Nov 2021",
+        "tags": ["Robotics","HMI", "UX/UI", "ROS", "Flutter"],
         "main": "true",
         "id": "proj2"
     },
-    {
-        "name": "Image-Based Localization Challenge",
-        "image": "proj3/title_img.gif",
-        "url": "/proj/proj3",
-        "date": "Nov 2016",
-        "tags": ["Self-Driving", "Deep Learning"],
-        "main": "true",
-        "id": "proj3"
-    },
+
     {
         "name": "Lane Lines Detection",
         "image": "proj1/title_img.gif",
         "url": "/proj/proj1",
-        "date": "Feb 2017",
-        "tags": ["Self-Driving","Computer Vision"],
-        "main": "false",
+        "date": "Dec 2022",
+        "tags": ["Self-Driving","Computer Vision, Image Proccesing"],
+        "main": "true",
         "id": "proj1"
     }
 ]

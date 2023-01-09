@@ -29,5 +29,3 @@ The final result of participation: the __15th__ place out of 582 teams (__top-3%
 2. [An approach to predicted class balancing][ClassBalancer]
 
 [Kaggle]: https://www.kaggle.com/c/sp-society-camera-model-identification
-[KaggleCamera]: {% post_url 2018-02-20-Camera-model-identification-with-deep-learning %}
-[ClassBalancer]: {% post_url 2018-02-21-An-approach-to-predicted-class-balancing %}

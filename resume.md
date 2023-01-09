@@ -22,7 +22,7 @@ permalink: /resume/
 ## __IT Skills and experience__
 
 | __Languages:__ | |Python, C/C++, R | ||
-| __Tools:__ | |ROS, Gazebo, PyTorch, TensorFlow, Keras, OpenCV, ffmpeg, Scikit-learn, NumPy, Docker | ||
+| __Tools:__ | |ROS, Gazebo, PyTorch, TensorFlow, Keras, OpenCV, ffmpeg, Scikit-learn, NumPy, Docker, Inventor, Fusion 360, Ansys | ||
 | __Skills:__ | |Artificial Neural Networks, CNN, Computer Vision, Localization and Pathplanning, Control, Numerical Methods | ||
 
 <!--
