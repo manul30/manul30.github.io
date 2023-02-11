@@ -22,8 +22,8 @@ permalink: /resume/
 ## __IT Skills and experience__
 
 | __Languages:__ | |Python, C/C++, R | ||
-| __Tools:__ | |ROS, Gazebo, PyTorch, TensorFlow, Keras, OpenCV, ffmpeg, Scikit-learn, NumPy, Docker, Inventor, Fusion 360, Ansys | ||
-| __Skills:__ | |Artificial Neural Networks, CNN, Computer Vision, Localization and Pathplanning, Control, Numerical Methods | ||
+| __Tools:__ | |ROS, Gazebo, PyTorch, Webots, TensorFlow, OpenCV, NumPy, Docker, Inventor, Fusion 360, Ansys | ||
+| __Skills:__ | |Artificial Neural Networks, Computer Vision, Localization and Pathplanning, Control, Simulation, Software Engineering | ||
 
 <!--
 | __Spare-time Projects:__ | | |
@@ -37,19 +37,31 @@ permalink: /resume/
 |__2016__ ||| __Beca Inglés EBR__, __PRONABEC__ |
 | ||| Obtained a scholarship for English language at Instituto Cultural Peruano Norteamericano (ICPNA) |
 
-## __Employment__
+## __Projects DEvelopment__
 
-__08/2017 - present__ __Computer Vision Scientist__ _Constanta_
+__2021-Present__ / __Formula SAE Electric Prototype - OFR__ (OHM Formula Racing/SAE UTEC)
 
 Responsibilities:
-* Research, develop and apply deep learning and computer vision algorithms for real-time video analysis of sports events.
-* Solve video event detection, image segmentation, object detection and tracking tasks in real-time.
-* Speeding up Deep Learning based pipelines, prepare production ready inference.
-* Post-processing of predictions with sophisticated filters (such as Unscented Kalman filter).
-* Applied computer vision programming in Python.
+* Redesigned upright and pedal box to give better ergonomics to the car and reduce its weight by 1.6%.
+* Designed the refrigeration system for electric motor and battery of a single-seat Formula Student Electric car.
+* Negotiated with sales representative to support the project by donating $3000 worth of components.
+* Led, trained and organized a team of 15 people.
+
+__2021-Present__ / __Underwater robot for sea decontamination__ (BLUME TEAM/GIIT ROBOTICS)
+
+Responsibilities:
+* Exploration of the effects of pollution in Peruvian maritime territory through a remote operation vehicle.
+* Design and development of the HMI of the prototype to facilitate its use and scalability and the backend system for monitoring the data object use in its communication protocol.
+
+__Apr-Ago/2021__ / __Robot development for telemedicine__ (UTEC)
+
+Responsibilities:
+* Identification of improvement opportunities in automated primary care processes using a robot.
+* 3D modeling and GUI software development of the project for easy handling.
+* Reduction of time and money (S./ 1500) through the redesign of the robot prototype for health monitoring.
 
 
 ## __Interests__
 
-Self-Driving Cars, Deep Learning, Computer Vision, Robotics, Artificial Intelligence, Mathematical Modeling, UAVs
+Self-Driving Cars, Deep Learning, Computer Vision, Robotics, Simulation, Autonomous Vehicles, AUVs, Guitar, Music
 

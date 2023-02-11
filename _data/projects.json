@@ -4,8 +4,8 @@
         "name": "AUV Bobelto Human-Machine Interface",
         "image": "proj2/title_hmi.gif",
         "url": "/proj/proj2",
-        "date": "Nov 2021",
-        "tags": ["Robotics","HMI", "UX/UI", "ROS", "Flutter"],
+        "date": "May 2022",
+        "tags": ["Robotics","HMI", "UX/UI", "ROS", "Flutter", "Mate ROV 2022"],
         "main": "true",
         "id": "proj2"
     },
@@ -14,9 +14,27 @@
         "name": "Lane Lines Detection",
         "image": "proj1/title_img.gif",
         "url": "/proj/proj1",
-        "date": "Dec 2022",
-        "tags": ["Self-Driving","Computer Vision, Image Proccesing"],
+        "date": "Nov 2022",
+        "tags": ["Self-Driving","Computer Vision","Image Proccesing"],
         "main": "true",
         "id": "proj1"
+    },
+    {
+        "name": "Omnidirectional Robot with Manipulator",
+        "image": "proj3/title_img.gif",
+        "url": "/proj/proj3",
+        "date": "Dec 2022",
+        "tags": ["Robotics","ROS", "Gazebo", "Control Systems", "Simulation"],
+        "main": "true",
+        "id": "proj3"
+    },
+    {
+        "name": "Formula Student Electric",
+        "image": "proj4/title_img.gif",
+        "url": "/proj/proj4",
+        "date": "Jan 2023",
+        "tags": ["FSAE","Electric","Competition","Experiences","Organization","Leadership", "Peru"],
+        "main": "true",
+        "id": "proj4"
     }
 ]

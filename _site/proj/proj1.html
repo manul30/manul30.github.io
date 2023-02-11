@@ -7,13 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="shortcut icon" href="/static/img/favicon.ico" />
-        <title>Lane Lines Detection Project - Computer Vision Lab</title>
+        <title>Lane Lines Detection Project - Manuel Carita</title>
         <meta name="author" content="Manuel Carita" />
         <meta name="description" content="Lane Lines Detection Project" />
-        <meta name="keywords" content="Lane Lines Detection Project, Computer Vision Lab, " />
+        <meta name="keywords" content="Lane Lines Detection Project, Manuel Carita, " />
 
         <meta content="" property="fb:app_id">
-        <meta content="Computer Vision Lab" property="og:site_name">
+        <meta content="Manuel Carita" property="og:site_name">
         
           <meta content="Lane Lines Detection Project" property="og:title">
         
@@ -21,7 +21,7 @@
           <meta content="article" property="og:type">
         
         
-          <meta content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+          <meta content="Hi there! This is a site where I can share some description about some interest projects throught my career. The main topics related are Computer Vision, Robotics, Machine Learning and EVs.
 " property="og:description">
         
         
@@ -43,7 +43,7 @@
           <meta name="twitter:url" content="http://localhost:4000/proj/proj1">
         
         
-          <meta name="twitter:description" content="A Robotics, Computer Vision and Machine Learning lab by Manuel Carita. The main focus of the blog is Self-Driving Car Technology and Deep Learning.
+          <meta name="twitter:description" content="Hi there! This is a site where I can share some description about some interest projects throught my career. The main topics related are Computer Vision, Robotics, Machine Learning and EVs.
 ">
         
         
@@ -183,49 +183,56 @@
     <img src='/static/projects/proj1/title_img.gif' alt="Project title image">
   <p> </p>
   <div class="post-content">
-    <p>This Project is based on the fourth task of the Udacity Self-Driving Car Nanodegree program. The main goal of the project is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car.</p>
+    <p>This project was made for Image Proccessing course at UTEC (Universidad de Ingeniería y Tecnología) for robotics specialization degree. The goal of the porject is to write a software pipeline using OpenCV library to detect lane boundaries in an imagea and then video from a front-facing camera on a car.</p>
 
-<p>It was implemented in Python with OpenCV library. The project <a href="https://github.com/NikolasEnt/Advanced-Lane-Lines">repo</a>.</p>
+<p>In this post, we will use the following test image:</p>
 
-<p>The key idea of the realization is use of virtual sensors with adaptive position and threshold which analyze the region of interest row by row. It also use information from previous frames and different techniques of results filtering for smoothing.
-The code also estimates radius of the road curvature and the position of the vehicle with respect to the lane center.</p>
+<p><img src="test.png" align="center" width="500" /></p>
 
-<h3 id="final-project-videos">Final project videos:</h3>
+<h3 id="defining-transform-points">Defining transform points</h3>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1YaguCWMklc" frameborder="0" allowfullscreen=""></iframe>
+<p>In order to make it easier to detect the lines, we need to condition the image to make the lines parallel in a new perspective. That’s why we are using Bird’s Eye View transform. In this case, we are going to use the <em>stretch</em> method shown <a href="https://nikolasent.github.io/opencv/2017/05/07/Bird's-Eye-View-Transformation.html">here</a>. By trial and error, we adjust our points so that we focus on our interest region.</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aOaV-RHMg2U" frameborder="0" allowfullscreen=""></iframe>
+<p><img src="points.png" align="center" width="500" /></p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tgQwXVzhrBI" frameborder="0" allowfullscreen=""></iframe>
+<p><img src="bevgray.png" align="center" width="500" /></p>
+
+<p>After applying the transform and changing from RGB to gray scale, we use the gabor filter wich let us focus on borders in a especif range of direction. After that, whe can plot a specific row of our image to see the pattern tha it generates. Then, we can use a threshold visualize better the lanes in our image.</p>
+
+<p><img src="plot.png" align="center" width="500" /></p>
+
+<p><img src="lanes.png" align="center" width="500" /></p>
+
+<h3 id="implementing-a-untraditional-algorithm">Implementing a untraditional algorithm</h3>
+
+<p>We can observe from the last 2 images, that there are 2 mainly pikes in the plot, and from there, we can inferre that those pikes are our desired lines, also, there are a certain distance from those pikes and also, the pikes have a standard width. With those all variables, we can elaborate our program logic.</p>
+
+<p><img src="explain.png" align="center" width="500" /></p>
+
+<p>With the previous info, we will try to select 2 points for every row of our image that satisfy the requirements. Those 2 points will be our center of each lane.
+<img src="lineas.png" align="center" width="500" /></p>
+
+<p>Then we apply a curve fitting to the image above. We can choose any order of the polynomical curve, but in this case we are going to keep it simple, so it will be a lineal curve.
+<img src="curve.png" align="center" width="500" /></p>
+
+<p>After that, we make the inverse Bird’s Eye View transform and we can see that the curve drawn are really close to the real lanes.
+<img src="final.png" align="center" width="500" /></p>
+
+<h2 id="disadvantages-and-future-work">Disadvantages and future work</h2>
+
+<ul>
+  <li>The logic algorithm detects the lanes only if there are 2 lanes in the region of interest. It means that it cannot detect the lines when the car pass from one carril to another.</li>
+  <li>The program can have problems when there are too much traffic signs in the road.</li>
+  <li>The <em>shrinking</em> Bird’s Eye View method can work better for this program since we don’t increase the spatial resolution and we only center in the central lines, it could also detect any rect lines.</li>
+</ul>
+
 
     <p> </p>
-    <p>The full project code is available on my <a href="https://github.com/NikolasEnt">Github</a></p>
-
+    
 <h3>Project posts</h3>
     
     <div class="well">
 <div class="list-group">
-    
-    <div class="list-group-item">
-    <div class="row-action-primary">
-        
-        <i><img src=/assets/post3/title_img.gif alt="Title img"></i>
-        
-    </div>
-    <div class="row-content">
-      <div class="least-content">07 May 2017</div>
-      <h4 class="list-group-item-heading"><a href="/opencv/2017/05/07/Bird's-Eye-View-Transformation.html">Bird's Eye View Transformation</a></h4>
-      
-      <p class="list-group-item-text">Convert a normal image to a Bird's Eye view projection with OpenCV.</p>
-      
-      <div class="least-content-readtime">
-
-  3 mins read
-
-</div>
-    </div>
-    </div>
-    <div class="list-group-separator"></div>
     
     </div>
 </div>
@@ -235,7 +242,7 @@ The code also estimates radius of the road curvature and the position of the veh
           <div class="row">
             <div class="col-md-12 col-xs-12 footer">
               <footer>
-  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>.
+  © 2022-2023 Manuel Carita, <a href="/">Home</a> - Powered by Jekyll with <a href="https://github.com/codeasashu/hcz-jekyll-blog">HCZ Material theme</a>, inspired in <a href="https://nikolasent.github.io/">Nikola Falaleev's site</a>.
 </footer>
 <div align="center">
   <ins class="adsbygoogle"
