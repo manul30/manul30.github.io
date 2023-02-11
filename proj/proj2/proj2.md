@@ -7,7 +7,7 @@ project_id: proj2
 
 This project is created based on the HMI requirements of the AUV (Autonomous Underwater Vehicle) made by __[Blume Team](https://www.linkedin.com/company/blume-team/)__ . The main goal of the project is to create a Graphical User Interface (GUI) to visualize the main sensor data to monitor the performance of the Bobelto ROV for the MATE ROV 2022 competition. This HMI was implemented and tested with the robot in the image below.
 
-<img src="/proj2/bobelto.png" align="center" width="1000">
+<img src="/proj/proj2/bobelto.png" align="center" width="1000">
 
 This project is a compilation of a lot of custom widgets. I explain some of them in the post page. Additionally, a lane line finding algorithm was added. It was implemented in Fluttter SDK for linux desktop. The main advantage of using Flutter SDK is that it can build the application in any platform that Flutter supports (i.e. MacOS, Windows, Linux, iOS, Android).  The project repo is availuble on [Github][projectRepo].
 
