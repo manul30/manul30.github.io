@@ -11,13 +11,13 @@ This project is part of the Fundamentals of Robotics course at UTEC. The objecti
 
 The robot is composed of 2 commercial robots: the KUKA KR4 Agilus and the Neobotix MPO-500. In this work, we attach the KUKA robot on top of the Neobotix. So, we will do the kinematic control of the moving platform with a proportional control.
 
-<img src="eq.png" align="center" width="300">
+<img src="/proj3/eq.png" align="center" width="300">
 
-<img src='gg.gif'  alt="Project title image">
+<img src='/proj3/gg.gif'  alt="Project title image">
 
 The whole proccess is described in the following pdf file (spanish)
 
-<iframe src="Proyecto_Fundamentos.pdf" height="500" width="900"></iframe>
+<iframe src="/proj3/Proyecto_Fundamentos.pdf" height="500" width="900"></iframe>
 
 The code can be located __[here](https://github.com/manul30/fdr_manipulator_movil_robot)__.
 
