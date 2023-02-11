@@ -2,7 +2,7 @@
 
     {
         "name": "AUV Bobelto Human-Machine Interface",
-        "image": "proj2/title_hmi.gif",
+        "image": "proj2/title_img.gif",
         "url": "/proj/proj2",
         "date": "May 2022",
         "tags": ["Robotics","HMI", "UX/UI", "ROS", "Flutter", "Mate ROV 2022"],
