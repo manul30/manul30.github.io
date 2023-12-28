@@ -7,7 +7,10 @@ group :jekyll_plugins do
   gem 'jekyll-watch'
   gem 'kramdown'
   gem 'rouge'
-  gem 'did_you_mean','~>1.2.0'
+#  gem 'did_you_mean','~>1.2.0'
   gem 'fileutils','~>1.0.2'
   gem 'date','~>1.0.0'
 end
+
+
+gem "webrick", "~> 1.8"

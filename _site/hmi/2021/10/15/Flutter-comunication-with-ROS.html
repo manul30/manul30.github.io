@@ -207,20 +207,21 @@
 <p>The main goal of the project is to stablish a communication between a Flutter desktop application and the ROS node. Also, to send and receive messages and visualize them in the app. The result of the implementation will be shown in Gazebo and the app itself.</p>
 
 <h2 id="roslib">Roslib</h2>
-<p>We are using <code class="highlighter-rouge">Roslib ^0.0.3</code>, a flutter library for communicating to a ROS node over websockets with rosbridge, influenced by roslibjs, according to its <a href="https://pub.dev/packages/roslib/versions/0.0.3">author</a>.</p>
+<p>We are using <code class="language-plaintext highlighter-rouge">Roslib ^0.0.3</code>, a flutter library for communicating to a ROS node over websockets with rosbridge, influenced by roslibjs, according to its <a href="https://pub.dev/packages/roslib/versions/0.0.3">author</a>.</p>
 
 <p><em><strong>Websockets in ROS</strong></em></p>
 
-<p>In order to work with websockets, it is neccesary to be able to execute it in a ROS node. That’s why we are using <code class="highlighter-rouge">rosbridge_suite</code> package. To install it, you can execute the following command:</p>
+<p>In order to work with websockets, it is neccesary to be able to execute it in a ROS node. That’s why we are using <code class="language-plaintext highlighter-rouge">rosbridge_suite</code> package. To install it, you can execute the following command:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-&lt;rosdistro&gt;-rosbridge-server</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-&lt;rosdistro&gt;-rosbridge-server
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Where <code class="highlighter-rouge">&lt;rosditro&gt;</code> is the workspace ROS version. In our case, it is <code class="highlighter-rouge">melodic</code>.</p>
+<p>Where <code class="language-plaintext highlighter-rouge">&lt;rosditro&gt;</code> is the workspace ROS version. In our case, it is <code class="language-plaintext highlighter-rouge">melodic</code>.</p>
 
 <h2 id="ros">ROS</h2>
 
-<p>Before moving to the code, it is important to review some ROS concepts such as <code class="highlighter-rouge">node</code> and <code class="highlighter-rouge">topics</code>.</p>
+<p>Before moving to the code, it is important to review some ROS concepts such as <code class="language-plaintext highlighter-rouge">node</code> and <code class="language-plaintext highlighter-rouge">topics</code>.</p>
 
 <p>According to the <strong><a href="http://wiki.ros.org/">ROS wiki</a></strong>, a node is a process that performs computation. Nodes are combined together into a graph and communicate with one another using streaming topics, RPC services, and the Parameter Server. It is an executable that ROS uses to communicate with other nodes.</p>
 
@@ -233,9 +234,9 @@
 <h2 id="widget">Widget</h2>
 
 <h3 id="ros-connection"><strong>ROS connection</strong></h3>
-<p>For the creation of the app we are going to create a Widget called <code class="highlighter-rouge">JoyStickPage</code> that returns a <code class="highlighter-rouge">Scaffold</code> widget. Inside of it we define our variables to initiate our <code class="highlighter-rouge">Ros</code> and <code class="highlighter-rouge">Topic</code> instances.</p>
+<p>For the creation of the app we are going to create a Widget called <code class="language-plaintext highlighter-rouge">JoyStickPage</code> that returns a <code class="language-plaintext highlighter-rouge">Scaffold</code> widget. Inside of it we define our variables to initiate our <code class="language-plaintext highlighter-rouge">Ros</code> and <code class="language-plaintext highlighter-rouge">Topic</code> instances.</p>
 
-<p>We’ll work with the <code class="highlighter-rouge">camera</code>, <code class="highlighter-rouge">cmd_vel</code>, and <code class="highlighter-rouge">imu</code> topics of the turtlebot robot.</p>
+<p>We’ll work with the <code class="language-plaintext highlighter-rouge">camera</code>, <code class="language-plaintext highlighter-rouge">cmd_vel</code>, and <code class="language-plaintext highlighter-rouge">imu</code> topics of the turtlebot robot.</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -295,66 +296,67 @@
 56
 57
 58
-</pre></td><td class="code"><pre><span class="kd">class</span> <span class="nc">JoyStickPage</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="o">{</span>
+</pre></td><td class="code"><pre><span class="kd">class</span> <span class="nc">JoyStickPage</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
   <span class="nd">@override</span>
-  <span class="n">_JoyStickPageState</span> <span class="n">createState</span><span class="o">()</span> <span class="o">=&gt;</span> <span class="n">_JoyStickPageState</span><span class="o">();</span>
-<span class="o">}</span>
+  <span class="n">_JoyStickPageState</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=</span><span class="p">&gt;</span> <span class="n">_JoyStickPageState</span><span class="p">();</span>
+<span class="p">}</span>
 
-<span class="kd">class</span> <span class="nc">_JoyStickPageState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">JoyStickPage</span><span class="o">&gt;</span> <span class="o">{</span>
-  <span class="n">late</span> <span class="n">Ros</span> <span class="n">ros</span><span class="o">;</span>
-  <span class="n">late</span> <span class="n">Topic</span> <span class="n">cmd_vel</span><span class="o">;</span>
-  <span class="n">late</span> <span class="n">Topic</span> <span class="n">imu</span><span class="o">;</span>
-  <span class="n">late</span> <span class="n">Topic</span> <span class="n">camera</span><span class="o">;</span>
+<span class="kd">class</span> <span class="nc">_JoyStickPageState</span> <span class="kd">extends</span> <span class="n">State</span><span class="p">&lt;</span><span class="n">JoyStickPage</span><span class="p">&gt;</span> <span class="p">{</span>
+  <span class="kd">late</span> <span class="n">Ros</span> <span class="n">ros</span><span class="p">;</span>
+  <span class="kd">late</span> <span class="n">Topic</span> <span class="n">cmd_vel</span><span class="p">;</span>
+  <span class="kd">late</span> <span class="n">Topic</span> <span class="n">imu</span><span class="p">;</span>
+  <span class="kd">late</span> <span class="n">Topic</span> <span class="n">camera</span><span class="p">;</span>
 
   <span class="nd">@override</span>
-  <span class="kt">void</span> <span class="n">initState</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">ros</span> <span class="o">=</span> <span class="n">Ros</span><span class="o">(</span><span class="nl">url:</span> <span class="s">'ws://0.0.0.0:9090'</span><span class="o">);</span>
+  <span class="kt">void</span> <span class="n">initState</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ros</span> <span class="o">=</span> <span class="n">Ros</span><span class="p">(</span><span class="nl">url:</span> <span class="s">'ws://0.0.0.0:9090'</span><span class="p">);</span>
 
-    <span class="n">cmd_vel</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
-        <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
-        <span class="nl">name:</span> <span class="s">'/cmd_vel'</span><span class="o">,</span>
-        <span class="nl">type:</span> <span class="s">"geometry_msgs/Twist"</span><span class="o">,</span>
-        <span class="nl">reconnectOnClose:</span> <span class="kc">true</span><span class="o">,</span>
-        <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
-        <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">);</span>
+    <span class="n">cmd_vel</span> <span class="o">=</span> <span class="n">Topic</span><span class="p">(</span>
+        <span class="nl">ros:</span> <span class="n">ros</span><span class="p">,</span>
+        <span class="nl">name:</span> <span class="s">'/cmd_vel'</span><span class="p">,</span>
+        <span class="nl">type:</span> <span class="s">"geometry_msgs/Twist"</span><span class="p">,</span>
+        <span class="nl">reconnectOnClose:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nl">queueLength:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nl">queueSize:</span> <span class="mi">10</span><span class="p">);</span>
 
 
-    <span class="n">imu</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
-      <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
-      <span class="nl">name:</span> <span class="s">'imu'</span><span class="o">,</span>
-      <span class="nl">type:</span> <span class="s">'sensor_msgs/Imu'</span><span class="o">,</span>
-      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">,</span>
-      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
-    <span class="o">);</span>
+    <span class="n">imu</span> <span class="o">=</span> <span class="n">Topic</span><span class="p">(</span>
+      <span class="nl">ros:</span> <span class="n">ros</span><span class="p">,</span>
+      <span class="nl">name:</span> <span class="s">'imu'</span><span class="p">,</span>
+      <span class="nl">type:</span> <span class="s">'sensor_msgs/Imu'</span><span class="p">,</span>
+      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">);</span>
 
-    <span class="n">camera</span> <span class="o">=</span> <span class="n">Topic</span><span class="o">(</span>
-      <span class="nl">ros:</span> <span class="n">ros</span><span class="o">,</span>
-      <span class="nl">name:</span> <span class="s">'camera/image/compressed'</span><span class="o">,</span>
-      <span class="nl">type:</span> <span class="s">'sensor_msgs/CompressedImage'</span><span class="o">,</span>
-      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="o">,</span>
-      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="o">,</span>
-    <span class="o">);</span>
+    <span class="n">camera</span> <span class="o">=</span> <span class="n">Topic</span><span class="p">(</span>
+      <span class="nl">ros:</span> <span class="n">ros</span><span class="p">,</span>
+      <span class="nl">name:</span> <span class="s">'camera/image/compressed'</span><span class="p">,</span>
+      <span class="nl">type:</span> <span class="s">'sensor_msgs/CompressedImage'</span><span class="p">,</span>
+      <span class="nl">queueSize:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="nl">queueLength:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">);</span>
 
-    <span class="k">super</span><span class="o">.</span><span class="na">initState</span><span class="o">();</span>
-  <span class="o">}</span>
+    <span class="k">super</span><span class="o">.</span><span class="na">initState</span><span class="p">();</span>
+  <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="n">initConnection</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
-    <span class="n">ros</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscribe</span><span class="o">();</span>
-    <span class="n">setState</span><span class="o">(()</span> <span class="o">{});</span>
-  <span class="o">}</span>
+  <span class="kt">void</span> <span class="n">initConnection</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="n">ros</span><span class="o">.</span><span class="na">connect</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">subscribe</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">subscribe</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscribe</span><span class="p">();</span>
+    <span class="n">setState</span><span class="p">(()</span> <span class="p">{});</span>
+  <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="n">destroyConnection</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
-    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">unsubscribe</span><span class="o">();</span>
-    <span class="n">await</span> <span class="n">ros</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-    <span class="n">setState</span><span class="o">(()</span> <span class="o">{});</span>
-  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+  <span class="kt">void</span> <span class="n">destroyConnection</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">unsubscribe</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">imu</span><span class="o">.</span><span class="na">unsubscribe</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">camera</span><span class="o">.</span><span class="na">unsubscribe</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">ros</span><span class="o">.</span><span class="na">close</span><span class="p">();</span>
+    <span class="n">setState</span><span class="p">(()</span> <span class="p">{});</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>We also declare two void functions that help us publishing the messsages from de joystick to the <code class="highlighter-rouge">cmd_vel</code> topic of the turtlebot.</p>
+<p>We also declare two void functions that help us publishing the messsages from de joystick to the <code class="language-plaintext highlighter-rouge">cmd_vel</code> topic of the turtlebot.</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -376,28 +378,29 @@
 18
 19
 </pre></td><td class="code"><pre>  
-  <span class="kt">void</span> <span class="nf">publishCmd</span><span class="p">(</span><span class="kt">double</span> <span class="n">_linear_speed</span><span class="o">,</span> <span class="kt">double</span> <span class="n">_angular_speed</span><span class="o">)</span> <span class="n">async</span> <span class="o">{</span>
-    <span class="kd">var</span> <span class="n">linear</span> <span class="o">=</span> <span class="o">{</span><span class="s">'x'</span><span class="o">:</span> <span class="n">_linear_speed</span><span class="o">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">};</span>
-    <span class="kd">var</span> <span class="n">angular</span> <span class="o">=</span> <span class="o">{</span><span class="s">'x'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="o">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="n">_angular_speed</span><span class="o">};</span>
-    <span class="kd">var</span> <span class="n">twist</span> <span class="o">=</span> <span class="o">{</span><span class="s">'linear'</span><span class="o">:</span> <span class="n">linear</span><span class="o">,</span> <span class="s">'angular'</span><span class="o">:</span> <span class="n">angular</span><span class="o">};</span>
-    <span class="n">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">publish</span><span class="o">(</span><span class="n">twist</span><span class="o">);</span>
-    <span class="n">print</span><span class="o">(</span><span class="s">'cmd published'</span><span class="o">);</span>
-    <span class="n">publishCounter</span><span class="o">();</span>
-  <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">publishCmd</span><span class="p">(</span><span class="kt">double</span> <span class="n">_linear_speed</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_angular_speed</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="n">linear</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="o">:</span> <span class="n">_linear_speed</span><span class="p">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="mf">0.0</span><span class="p">};</span>
+    <span class="kd">var</span> <span class="n">angular</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="o">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s">'y'</span><span class="o">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s">'z'</span><span class="o">:</span> <span class="n">_angular_speed</span><span class="p">};</span>
+    <span class="kd">var</span> <span class="n">twist</span> <span class="o">=</span> <span class="p">{</span><span class="s">'linear'</span><span class="o">:</span> <span class="n">linear</span><span class="p">,</span> <span class="s">'angular'</span><span class="o">:</span> <span class="n">angular</span><span class="p">};</span>
+    <span class="k">await</span> <span class="n">cmd_vel</span><span class="o">.</span><span class="na">publish</span><span class="p">(</span><span class="n">twist</span><span class="p">);</span>
+    <span class="n">print</span><span class="p">(</span><span class="s">'cmd published'</span><span class="p">);</span>
+    <span class="n">publishCounter</span><span class="p">();</span>
+  <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="n">_move</span><span class="o">(</span><span class="kt">double</span> <span class="n">_degrees</span><span class="o">,</span> <span class="kt">double</span> <span class="n">_distance</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">print</span><span class="o">(</span>
-        <span class="s">'Degree:'</span> <span class="o">+</span> <span class="n">_degrees</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">' Distance:'</span> <span class="o">+</span> <span class="n">_distance</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-    <span class="kt">double</span> <span class="n">radians</span> <span class="o">=</span> <span class="n">_degrees</span> <span class="o">*</span> <span class="o">((</span><span class="mi">22</span> <span class="o">/</span> <span class="mi">7</span><span class="o">)</span> <span class="o">/</span> <span class="mi">180</span><span class="o">);</span>
-    <span class="kt">double</span> <span class="n">linear_speed</span> <span class="o">=</span> <span class="n">cos</span><span class="o">(</span><span class="n">radians</span><span class="o">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="o">;</span>
-    <span class="kt">double</span> <span class="n">angular_speed</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="o">(</span><span class="n">radians</span><span class="o">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="o">;</span>
+  <span class="kt">void</span> <span class="n">_move</span><span class="p">(</span><span class="kt">double</span> <span class="n">_degrees</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_distance</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">(</span>
+        <span class="s">'Degree:'</span> <span class="o">+</span> <span class="n">_degrees</span><span class="o">.</span><span class="na">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s">' Distance:'</span> <span class="o">+</span> <span class="n">_distance</span><span class="o">.</span><span class="na">toString</span><span class="p">());</span>
+    <span class="kt">double</span> <span class="n">radians</span> <span class="o">=</span> <span class="n">_degrees</span> <span class="o">*</span> <span class="p">((</span><span class="mi">22</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">linear_speed</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">angular_speed</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">)</span> <span class="o">*</span> <span class="n">_distance</span><span class="p">;</span>
 
-    <span class="n">publishCmd</span><span class="o">(</span><span class="n">linear_speed</span><span class="o">,</span> <span class="n">angular_speed</span><span class="o">);</span>
-  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+    <span class="n">publishCmd</span><span class="p">(</span><span class="n">linear_speed</span><span class="p">,</span> <span class="n">angular_speed</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h3 id="joystick"><strong>Joystick</strong></h3>
 
-<p>For the plotting of the Joystick, we are using the flutter library <code class="highlighter-rouge">control_pad</code> which can be found <strong><a href="https://pub.dev/packages/control_pad/versions/1.1.1+1">here</a></strong>.</p>
+<p>For the plotting of the Joystick, we are using the flutter library <code class="language-plaintext highlighter-rouge">control_pad</code> which can be found <strong><a href="https://pub.dev/packages/control_pad/versions/1.1.1+1">here</a></strong>.</p>
 
 <p><img src="https://i.imgur.com/ZwfNg9W.jpg" align="center" width="300" /></p>
 
@@ -417,23 +420,24 @@
 11
 12
 13
-</pre></td><td class="code"><pre><span class="n">Widget</span> <span class="nf">getImagenBase64</span><span class="p">(</span><span class="kt">String</span> <span class="n">imagen</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">var</span> <span class="n">_imageBase64</span> <span class="o">=</span> <span class="n">imagen</span><span class="o">;</span>
-    <span class="kd">const</span> <span class="n">Base64Codec</span> <span class="n">base64</span> <span class="o">=</span> <span class="n">Base64Codec</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">_imageBase64</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Container</span><span class="o">(</span><span class="nl">child:</span> <span class="n">Text</span><span class="o">(</span><span class="s">'Image'</span><span class="o">),);</span>
-    <span class="kd">var</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">_imageBase64</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="na">memory</span><span class="o">(</span>
-          <span class="n">bytes</span><span class="o">,</span>
-          <span class="nl">gaplessPlayback:</span> <span class="kc">true</span><span class="o">,</span>
-          <span class="nl">width:</span> <span class="mi">400</span><span class="o">,</span>
-          <span class="nl">fit:</span> <span class="n">BoxFit</span><span class="o">.</span><span class="na">fitWidth</span><span class="o">,</span>
+</pre></td><td class="code"><pre><span class="n">Widget</span> <span class="nf">getImagenBase64</span><span class="p">(</span><span class="kt">String</span> <span class="n">imagen</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="n">_imageBase64</span> <span class="o">=</span> <span class="n">imagen</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="n">Base64Codec</span> <span class="n">base64</span> <span class="o">=</span> <span class="n">Base64Codec</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_imageBase64</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Container</span><span class="p">(</span><span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span><span class="s">'Image'</span><span class="p">),);</span>
+    <span class="kd">var</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="na">decode</span><span class="p">(</span><span class="n">_imageBase64</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="na">memory</span><span class="p">(</span>
+          <span class="n">bytes</span><span class="p">,</span>
+          <span class="nl">gaplessPlayback:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nl">width:</span> <span class="mi">400</span><span class="p">,</span>
+          <span class="nl">fit:</span> <span class="n">BoxFit</span><span class="o">.</span><span class="na">fitWidth</span><span class="p">,</span>
        
-    <span class="o">);</span>
-  <span class="o">}</span></pre></td></tr></tbody></table></code></pre></figure>
+    <span class="p">);</span>
+  <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h3 id="streaming"><strong>Streaming</strong></h3>
 
-<p>Our app will be constantly reading the new messages of the websocket node thanks to the <code class="highlighter-rouge">StreamBuilder</code> Widget declare as below. The connection will be triggered with a button of class <code class="highlighter-rouge">ActionChip</code>. Finally, we call the <code class="highlighter-rouge">getImageBase64()</code> to render the image in our app with an embedded HTML tag.</p>
+<p>Our app will be constantly reading the new messages of the websocket node thanks to the <code class="language-plaintext highlighter-rouge">StreamBuilder</code> Widget declare as below. The connection will be triggered with a button of class <code class="language-plaintext highlighter-rouge">ActionChip</code>. Finally, we call the <code class="language-plaintext highlighter-rouge">getImageBase64()</code> to render the image in our app with an embedded HTML tag.</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -491,62 +495,63 @@
 54
 55
 56
-</pre></td><td class="code"><pre><span class="o">...</span>
-      <span class="nl">body:</span> <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="kt">Object</span><span class="o">&gt;(</span>
-      <span class="nl">stream:</span> <span class="n">ros</span><span class="o">.</span><span class="na">statusStream</span><span class="o">,</span>
-      <span class="nl">builder:</span> <span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">snapshot</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Center</span><span class="o">(</span>
-          <span class="nl">child:</span> <span class="n">Column</span><span class="o">(</span>
-            <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="o">,</span>
-            <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="o">,</span>
-            <span class="nl">children:</span> <span class="o">&lt;</span><span class="n">Widget</span><span class="o">&gt;[</span>
-              <span class="n">ActionChip</span><span class="o">(</span>
-                <span class="nl">label:</span> <span class="n">Text</span><span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span>
+</pre></td><td class="code"><pre><span class="p">...</span>
+      <span class="nl">body:</span> <span class="n">StreamBuilder</span><span class="p">&lt;</span><span class="kt">Object</span><span class="p">&gt;(</span>
+      <span class="nl">stream:</span> <span class="n">ros</span><span class="o">.</span><span class="na">statusStream</span><span class="p">,</span>
+      <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Center</span><span class="p">(</span>
+          <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="p">,</span>
+            <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="o">.</span><span class="na">center</span><span class="p">,</span>
+            <span class="nl">children:</span> <span class="p">&lt;</span><span class="n">Widget</span><span class="p">&gt;[</span>
+              <span class="n">ActionChip</span><span class="p">(</span>
+                <span class="nl">label:</span> <span class="n">Text</span><span class="p">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span>
                     <span class="o">?</span> <span class="s">'DISCONNECT'</span>
-                    <span class="o">:</span> <span class="s">'CONNECT'</span><span class="o">),</span>
+                    <span class="o">:</span> <span class="s">'CONNECT'</span><span class="p">),</span>
                 <span class="nl">backgroundColor:</span> <span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span>
-                    <span class="o">?</span> <span class="n">Colors</span><span class="o">.</span><span class="na">green</span><span class="o">[</span><span class="mi">300</span><span class="o">]</span>
-                    <span class="o">:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">grey</span><span class="o">[</span><span class="mi">300</span><span class="o">],</span>
-                <span class="nl">onPressed:</span> <span class="o">()</span> <span class="o">{</span>
-                  <span class="n">print</span><span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
-                  <span class="k">if</span> <span class="o">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">!=</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="k">this</span><span class="o">.</span><span class="na">initConnection</span><span class="o">();</span>
-                  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                    <span class="k">this</span><span class="o">.</span><span class="na">destroyConnection</span><span class="o">();</span>
-                  <span class="o">}</span>
-                <span class="o">},</span>
-              <span class="o">),</span>
-              <span class="n">Padding</span><span class="o">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mi">10</span><span class="o">)),</span>
-              <span class="n">Container</span><span class="o">(</span>
-              <span class="nl">child:</span> <span class="n">JoystickView</span><span class="o">(</span>
-                <span class="nl">onDirectionChanged:</span> <span class="o">(</span> <span class="kt">double</span> <span class="n">degrees</span><span class="o">,</span> <span class="kt">double</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">_move</span><span class="o">(</span><span class="n">degrees</span><span class="o">,</span> <span class="n">distance</span><span class="o">);</span>
-                <span class="o">},</span>
-              <span class="o">),),</span>
-              <span class="n">Padding</span><span class="o">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mi">20</span><span class="o">)),</span>
-                  <span class="n">StreamBuilder</span><span class="o">(</span>
-                    <span class="nl">stream:</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscription</span><span class="o">,</span>
-                    <span class="nl">builder:</span> <span class="o">(</span><span class="n">context2</span><span class="o">,</span><span class="n">AsyncSnapshot</span><span class="o">&lt;</span><span class="kd">dynamic</span><span class="o">&gt;</span> <span class="n">snapshot2</span><span class="o">){</span>
-                      <span class="k">if</span> <span class="o">(</span><span class="n">snapshot2</span><span class="o">.</span><span class="na">hasData</span><span class="o">){</span>
-                        <span class="k">return</span> <span class="n">Html</span><span class="o">(</span>
+                    <span class="o">?</span> <span class="n">Colors</span><span class="o">.</span><span class="na">green</span><span class="p">[</span><span class="mi">300</span><span class="p">]</span>
+                    <span class="o">:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">grey</span><span class="p">[</span><span class="mi">300</span><span class="p">],</span>
+                <span class="nl">onPressed:</span> <span class="p">()</span> <span class="p">{</span>
+                  <span class="n">print</span><span class="p">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span><span class="p">);</span>
+                  <span class="k">if</span> <span class="p">(</span><span class="n">snapshot</span><span class="o">.</span><span class="na">data</span> <span class="o">!=</span> <span class="n">Status</span><span class="o">.</span><span class="na">CONNECTED</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">initConnection</span><span class="p">();</span>
+                  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">destroyConnection</span><span class="p">();</span>
+                  <span class="p">}</span>
+                <span class="p">},</span>
+              <span class="p">),</span>
+              <span class="n">Padding</span><span class="p">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+              <span class="n">Container</span><span class="p">(</span>
+              <span class="nl">child:</span> <span class="n">JoystickView</span><span class="p">(</span>
+                <span class="nl">onDirectionChanged:</span> <span class="p">(</span> <span class="kt">double</span> <span class="n">degrees</span><span class="p">,</span> <span class="kt">double</span> <span class="n">distance</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">_move</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">distance</span><span class="p">);</span>
+                <span class="p">},</span>
+              <span class="p">),),</span>
+              <span class="n">Padding</span><span class="p">(</span><span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="p">(</span><span class="mi">20</span><span class="p">)),</span>
+                  <span class="n">StreamBuilder</span><span class="p">(</span>
+                    <span class="nl">stream:</span> <span class="n">camera</span><span class="o">.</span><span class="na">subscription</span><span class="p">,</span>
+                    <span class="nl">builder:</span> <span class="p">(</span><span class="n">context2</span><span class="p">,</span><span class="n">AsyncSnapshot</span><span class="p">&lt;</span><span class="kd">dynamic</span><span class="p">&gt;</span> <span class="n">snapshot2</span><span class="p">){</span>
+                      <span class="k">if</span> <span class="p">(</span><span class="n">snapshot2</span><span class="o">.</span><span class="na">hasData</span><span class="p">){</span>
+                        <span class="k">return</span> <span class="n">Html</span><span class="p">(</span>
                           
                           <span class="nl">data:</span> <span class="s">"""&lt;img src="</span><span class="nl">data:</span><span class="n">https</span><span class="c1">//image/jpeg;base64,${snapshot2.data['msg']['data']}" &gt;"""</span>
 
-                        <span class="o">);</span>
-                      <span class="o">}</span>
-                      <span class="k">else</span><span class="o">{</span>
-                        <span class="k">return</span> <span class="n">CircularProgressIndicator</span><span class="o">();</span>
-                      <span class="o">}</span>
-                    <span class="o">}</span>
-                  <span class="o">),</span>
-                <span class="o">]</span>
-              <span class="o">),</span>
+                        <span class="p">);</span>
+                      <span class="p">}</span>
+                      <span class="k">else</span><span class="p">{</span>
+                        <span class="k">return</span> <span class="n">CircularProgressIndicator</span><span class="p">();</span>
+                      <span class="p">}</span>
+                    <span class="p">}</span>
+                  <span class="p">),</span>
+                <span class="p">]</span>
+              <span class="p">),</span>
             
-          <span class="o">);</span>
+          <span class="p">);</span>
 
-      <span class="o">},</span>
+      <span class="p">},</span>
 
-<span class="o">...</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="final-result">Final result</h2>
 
@@ -624,16 +629,13 @@
 <script src="/static/js/main.js"></script>
 <script src="/static/js/projects.js"></script>
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-087BFBSVWV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-104440412-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'G-087BFBSVWV');
 </script>
-
   </body>
 </html>
