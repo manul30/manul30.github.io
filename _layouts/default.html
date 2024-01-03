@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    {% include analytics.html %}
-    {% include meta.html %}
+     {% if site.google_analytics and jekyll.environment == 'production' %}
+     {% include analytics.html %}
+     {% endif %}
+     {% include meta.html %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
       <script type="text/javascript">window.baseurl = '{{ site.url }}';</script>
       {% include css.html %}
