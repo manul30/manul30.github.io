@@ -36,5 +36,14 @@
         "tags": ["FSAE","Electric","Competition","Experiences","Organization","Leadership", "Peru"],
         "main": "true",
         "id": "proj4"
+    },
+    {
+        "name": "Visual SLAM for navigation with Stereo Camera and RGB-D",
+        "image": "proj5/map_rgbd.png",
+        "url": "/proj/proj5",
+        "date": "Jun 2023",
+        "tags": ["Autonomous Robotics","Computer Vision"],
+        "main": "true",
+        "id": "proj5"
     }
 ]
