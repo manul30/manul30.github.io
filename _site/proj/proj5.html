@@ -204,13 +204,127 @@
 
 <p>The first step of the methodology is to establish a navigation algorithm based on the measurements that performs 2D LiDAR. The flow chart of this algorithm is detailed better in the figure below. The essence is to avoid collision with obstacles while navigating through an unknown environment performing the SLAM.</p>
 
-<p><img src="/proj/proj5/diagrama-flujo.png" align="center" width="450" /></p>
+<p><img src="/proj/proj5/diagrama-flujo.png" style="display: block;margin-left: auto; margin-right: auto;" width="300" /></p>
 
-<p><img src="/proj/proj5/gg.gif" alt="Project title image" /></p>
+<h3 id="b-visual-slam---stereo-camera">B. Visual SLAM - Stereo Camera</h3>
 
-<p>The whole proccess is described in the following pdf file (spanish)</p>
+<p>To make localization and mapping for the robot. The first method to obtain the map of the environment is to use two cameras in stereo configuration.
+That is the reason to first calibrate the cameras with an chess board in Gazebo (You can refer to the <a href="/hmi/2021/10/15/Flutter-comunication-with-ROS.html">Camera Calibration in Gazebo</a>).
+The input will be the two images of the cameras (left and right) to obtain the cloud point from the robot frame and then, we use the R-TabMap library to convert these cloudpoints into a map. We will be use the following logic shown in the figure below.</p>
 
-<iframe src="/proj/proj5/Proyecto_Fundamentos.pdf" height="500" width="900"></iframe>
+<p><img src="/proj/proj5/rqt.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<h3 id="c-visual-slam---kinect--imu">C. Visual SLAM - Kinect + IMU</h3>
+<p>This second method consists on the usage of a depth camera (Kinect) and the IMU for robot’s pose estimation. In this case, we will be using the same library as in B, so it needs the odometry and the pointcloud. For the odometry, we are going to apply Extended Kalman Filter (EKF) for pose estimation having linear acceleration and angular velocity as measurements.</p>
+
+<p><img src="/proj/proj5/rqt_C.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<h2 id="simulation">Simulation</h2>
+
+<p>The neccesary packages to run the project are described in thebelow.</p>
+
+<h5 id="1-creating-a-directory-for-turtlebots-files">1. Creating a directory for turtlebots files.</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd src
+mkdir turtlebot3
+cd turtlebot3
+git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+</code></pre></div></div>
+
+<h5 id="2-cloning-the-repository-of-the-project">2. Cloning the repository of the project.</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ..
+git clone https://github.com/Jimi1811/Visual_SLAM_in_turtlebot3.git
+cd ..
+catkin_make
+</code></pre></div></div>
+
+<h5 id="3-cloning-additional-packages-that-helps-the-camera-calibration">3. Cloning additional packages that helps the camera calibration.</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd src
+git clone https://github.com/ros-perception/image_pipeline.git
+cd ..
+catkin_make --only-pkg-with-deps stereo_image_proc
+</code></pre></div></div>
+
+<h5 id="4-running-these-lines-below-to-execute-the-slam-simulation">4. Running these lines below to execute the SLAM simulation.</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roslaunch stereo_camera maze.launch
+ROS_NAMESPACE=/stereo rosrun stereo_image_proc stereo_image_proc
+roslaunch rtabmap_legacy stereo_mapping.launch stereo_namespace:="/stereo" rtabmap_args:="--delete_db_on_start" rviz:=true rtabmapviz:=false
+</code></pre></div></div>
+
+<p>The following image describes the world we are trying to mrun the SLAM algorithm with the turtlebot3.</p>
+
+<p><img src="/proj/proj5/turtlebot_maze_map_modified.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<p>The voxels (little cubes in rviz) compound the pointcloud, which will be an input for the R-TabMap. This refers to the first method (stereo camera)</p>
+
+<p><img src="/proj/proj5/map_rgbd.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<p>Here it is the turtlebot exploring new positions and poses inside the environment. While it is moving, the pointclouds try to match to make up the map.</p>
+
+<p><img src="/proj/proj5/map_rbgd_2.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<p>Finally, it is seen that when trying to move the turtlebot for too long, it may cause some displacement between its real position and the one received in Rviz, causing an incorrect mapping.</p>
+
+<p><img src="/proj/proj5/displacement_rviz.png" style="display: block;margin-left: auto; margin-right: auto;" width="450" /></p>
+
+<h2 id="results">Results</h2>
+
+<p>Now, it is important to measure how accurate are the methods shown previously. That is the reason we will be comparing the grid map obtained by the algorithms to its ground truth. We will use two measurements to compare which one of both is better. (correlation and minimun square error).</p>
+
+<p>The next image corresponds to the stereo method 
+<img src="/proj/proj5/map_stereo.png" style="display: block;margin-left: auto; margin-right: auto;" width="250" /></p>
+
+<p>This map is the result of the second method.
+<img src="/proj/proj5/map_kinect.png" style="display: block;margin-left: auto; margin-right: auto;" width="250" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: center">|RGB-D &amp; EKF |</th>
+      <th style="text-align: center">Stereo Vision|</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Correlación</td>
+      <td style="text-align: center">0.189</td>
+      <td style="text-align: center">0.2157</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MSE</td>
+      <td style="text-align: center">0.7104</td>
+      <td style="text-align: center">0.808</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>Both SLAM methods, using RGB-D camera and
+stereo vision, they managed to successfully complete the task of
+mapping of the proposed map. However, each method has
+its limitations. The RGB-D method has restrictions on
+regarding distance, since its detection range is limited.
+On the other hand, the stereo vision method requires super-
+fices with textures and can be affected by conditions
+of lighting. As recommendations, it is suggested to improve
+the navigation algorithm to avoid collisions and optimize
+the filters used for the IMU, in order to obtain a
+more accurate estimation of the robot pose. These improvements
+will contribute to obtaining more robust and reliable results
+in future 3D mapping applications with Visual SLAM.</p>
+
+<p><br /></p>
+
+<p>Here it is an article about this project (Spanish):</p>
+
+<iframe src="/proj/proj5/Informe_Final.pdf" height="500" width="900"></iframe>
 
 <p>The code can be located <strong><a href="https://github.com/Jimi1811/Visual_SLAM_in_turtlebot3">here</a></strong>.</p>
 
