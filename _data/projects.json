@@ -45,5 +45,14 @@
         "tags": ["Autonomous Robotics","Computer Vision"],
         "main": "true",
         "id": "proj5"
+    },
+    {
+        "name": "Impedance control on Robotic Arm",
+        "image": "proj6/gif.gif",
+        "url": "/proj/proj6",
+        "date": "Dec 2023",
+        "tags": ["Autonomous Robotics","Control Systems", "Robotics"],
+        "main": "true",
+        "id": "proj6"
     }
 ]

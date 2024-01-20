@@ -22,6 +22,5 @@ There are some newer versions of the GUI, tha last one up to date includes the v
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dWXkCMG5Bxc" frameborder="0" allowfullscreen align="center"></iframe>
 
-
 [projectRepo]: https://github.com/manul30/Flutter-bobelto
 [postSVM]: {% post_url 2021-10-15-Flutter-comunication-with-ROS %}

@@ -5,18 +5,18 @@ permalink: /resume/
 ---
 <div align="center">
   <h2><b>Manuel Carita</b></h2>
-  <p>Lima, Peru, <a href="mailto:manuel.carita@utec.edu.pe">manuel.carita@utec.edu.pe</a></p>
+  <p>Lima, Peru  | <a href="mailto:manuel.carita@utec.edu.pe">manuel.carita@utec.edu.pe</a></p>
+  <p> (+51) 982 321 070 </p>
   <i>Mechatronic Engineer</i>
 </div>
 
 ## __Education__
  
-| __11/2020 - present__ ||| [__MOOCs__](/moocs/) >10 courses in computer and data sciences, robotics, computer vision and machine learning|
-| ||| _ Udacity, edX ,etc._ |
+| __6/2020 - present__ ||| [__Certifications and MOOCs__](/moocs/) courses in computer and data sciences, robotics, computer vision and machine learning|
+| ||| _ UTEC, Purdue University, EdX , etc._ |
 
 | __08/2019 - present__ ||| __Bachelor of Science__ in Mechatronic Engineering, Department of  |
 | ||| _Universidad de Ingeniería y Tecnología (UTEC)_ |
-
 
 
 ## __IT Skills and experience__
@@ -37,7 +37,7 @@ permalink: /resume/
 |__2016__ ||| __Beca Inglés EBR__, __PRONABEC__ |
 | ||| Obtained a scholarship for English language at Instituto Cultural Peruano Norteamericano (ICPNA) |
 
-## __Projects DEvelopment__
+## __Projects Development__
 
 __2021-Present__ / __Formula SAE Electric Prototype - OFR__ (OHM Formula Racing/SAE UTEC)
 
